@@ -12,6 +12,7 @@ public class Allocater {
 	int systemSize;
 	int maxSize;
 	int ramSize;
+	int time;
 	//int chartTop;//用来表明最大的索引值
 	public Allocater() {
 		super();
@@ -45,10 +46,10 @@ public class Allocater {
 		}
 		for (int i=0;i<max;i++) {
 			for (int j=0;j<max-i;j++) {
-				if (spaceChart[i].getStart()>spaceChart[j].getStart()) {
+				if (spaceChart[j].getStart()>spaceChart[j+1].getStart()) {
 					Space temp=spaceChart[j];
-					spaceChart[j]=spaceChart[i];
-					spaceChart[i]=temp;
+					spaceChart[j]=spaceChart[j+1];
+					spaceChart[j+1]=temp;
 				}
 				else;
 			}
@@ -56,8 +57,9 @@ public class Allocater {
 	}
 	public void Main() {
 		this.FillProcess();
-		for (int time=0;time<30;time++) {//限定30s时间
+		for (time=0;time<30;time++) {//限定30s时间
 			this.Sort();//先排序
+			if (time==27) {;}else {;}
 			for (int i=0;i<this.processChart.length;i++) {//遍历进程
 				this.Sort();
 				if (this.processChart[i]==null) {//遍历到NULL直接跳过
@@ -73,7 +75,9 @@ public class Allocater {
 						this.Sweep(tmp);
 						this.Join();
 						}
-					else {continue;}
+					else {
+						this.Join();
+						continue;}
 				}//else
 
 			}//for
@@ -164,6 +168,14 @@ public class Allocater {
 			System.out.println(temp.name+"#"+temp.size+"#"+temp.startTime+"#"+temp.endTime);
 		}
 	}
+
+	
+	public int getTime() {
+		return time;
+	}
+	public void setTime(int time) {
+		this.time = time;
+	}
 	public void Join() {//把空间上连续或完全重叠的多个空闲区合在一起
 		this.Sort();
 		List<Space> list=Arrays.asList(this.spaceChart);//将数组转换为list集合
@@ -176,8 +188,8 @@ public class Allocater {
 				i--;
 			}
 			else if (arr.get(i+1)!=null&&(arr.get(i).getLen()!=0)) {//邻接的焊接起来
-				if (arr.get(i).getStart()+arr.get(1+i).getLen()==arr.get(i+1).start) {
-					arr.get(i).setLen(arr.get(i).len + arr.get(i).getStart() + arr.get(i+1).getLen());
+				if (arr.get(i).getStart()+arr.get(i).getLen()==arr.get(i+1).start) {
+					arr.get(i).setLen(arr.get(i).len + arr.get(i+1).getLen());
 					arr.remove(i+1);
 				}
 				else {;}
