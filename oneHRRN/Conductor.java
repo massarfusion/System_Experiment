@@ -8,6 +8,7 @@ public class Conductor {
 	//JCB executing;
 	JCB queue;//加队列时，放不下的就塞到这里，有任务退出再尝试加入主队列
 	JCB head;
+	JCB display;
 	public Conductor(int printer, int tape, int volumn) {
 		super();
 		this.printer = printer;
@@ -17,16 +18,22 @@ public class Conductor {
 		this.head=new JCB();
 		this.queue=new JCB();
 	}
-	public void addQueue(JCB adder) {
+	public void addQueue(JCB adder) {//在末尾添加，并且清空该JCB的NEXT
 		JCB block=this.queue;
 		while (block.next!=null) {block=block.next;}
 		block.next=adder;
+		adder.next=null;
 	}
 	public void popQueue() {
-		JCB block=this.queue.next;
-		while (block!=null) {
-			if (this.appendAllowed(block))
-			{this.append(block);return;}
+		JCB block=this.queue;
+		while (block.next!=null) {
+			if (this.appendAllowed(block.next)){
+				this.append(block.next);
+				JCB tmp=block.next.next;
+				block.next=tmp;
+			
+			//return;
+			}
 			else
 			{block=block.next;}
 		}
@@ -43,6 +50,7 @@ public class Conductor {
 			JCB block=this.head;
 			while (block.next!=null) {block=block.next;}
 			block.next=appex;
+			appex.next=null;
 			return true;
 		}
 	}

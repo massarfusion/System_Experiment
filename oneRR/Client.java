@@ -16,6 +16,8 @@ public class Client {
 		c1.append(p4);
 		c1.append(p5);
 		c1.execute();
+		
+		
 	}
 
 }

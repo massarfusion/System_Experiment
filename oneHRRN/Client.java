@@ -10,12 +10,15 @@ public class Client {
 		JCB block1=new JCB("one",   5,  1,  2, 5, 2) ;
 		JCB block2=new JCB("two",   5,  3,  6, 1, 9) ;
 		JCB block3=new JCB("three", 15, 10, 3, 3, 5) ;
-		
+		JCB block4=new JCB("four", 1, 6, 3, 3, 5) ;
+		JCB block5=new JCB("five", 15, 10, 3, 3, 5) ;
 		c1.append(block1);
 		c1.append(block2);
 		c1.append(block3);
+		c1.append(block4);
+		c1.append(block5);
 		c1.execute();
-		
+		block1.toString();
 	}
 
 }

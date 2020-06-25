@@ -101,6 +101,7 @@ public class Allocater {
 		}
 		else {;}
 		this.spaceChart[max]=new Space(tmp.getSpaceStart(),tmp.size);
+		this.spaceChart[max].setStatus(1);
 	}
 	public void Allocate(Process pro) {//进程进入时给他分配
 		int max=0;

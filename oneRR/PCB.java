@@ -34,5 +34,8 @@ public class PCB {
 		}
 		else {return;}
 	}
-	
+	public void printme() {
+		System.out.printf("%s %d %d %s",this.next.name,this.next.estTime,this.next.runTime,this.status);
+		System.out.println();
+	}
 }

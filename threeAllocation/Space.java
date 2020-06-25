@@ -25,7 +25,7 @@ public class Space {
 	public void setLen(int len) {
 		this.len = len;
 	}
-	public void setStatus(char status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 	public int compareTo(Space oneSpace) {

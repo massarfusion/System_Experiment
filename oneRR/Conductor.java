@@ -66,6 +66,7 @@ public class Conductor {
 	public void sweep() {//把已经运行完成的进程赶出队列,并且无论如何也要把RUNNING后推
 		if (running.status.equals("E")) {
 			PCB tmp=this.head;
+			if (tmp.next==tmp) {return;}else {;}
 			while (tmp.next!=running) {
 				tmp=tmp.next;
 			}
